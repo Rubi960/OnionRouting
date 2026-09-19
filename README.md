@@ -1,5 +1,8 @@
 # Onion Routing
 
+![Python](https://img.shields.io/badge/python-3.11+-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+
 - Made by **Rubén Diz Martínez**
 
 ## :scroll: Description
@@ -128,6 +131,10 @@ Encrypting a simple direct message                                |  Decrypting 
 Encrypting a message with more than one jump                               |  Decrypting a message with more than one jump remaining
 :-------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------:
 ![Encrypting a message with more than one jump](img/06_encrypt_jumps.png)  |  ![Decrypting a message with more than one jump remaining](img/07_decrypt_jumps.png)
+
+## :page_facing_up: License
+
+This project is licensed under the [MIT License](LICENSE).
 
 ## :incoming_envelope: Contact me
 
