@@ -1,0 +1,31 @@
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.backends import default_backend
+
+pubkeydictionary = {
+    "jmp": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7xX0SKsM3y95F2xORZGPbwMLRHNrv7odUfJrdRvIuvkOT6XclnVeB56sBcIY2OEsiIEwu2Cv3CgCfq61878UVpa6cZxx36SNeUDWgE5lm+dB55K/WIPytQAe761ICDXC/I/c/HDsUt0TOZZATk4tjXiBM28q1MD3f/euaSawpcUAeYpCkYcsTGjM+5QkJ8Tu7o86ZoixKeg6qXaJ+xCtOGmmyYXFJ5iIXILyBisnoJ+CiDF+7OkVx5PqyVjWCkdbHpi4frDoH8tBLCPqZBjjsSvEtDQm4rlLsTiAody57Jw9EpG7KB0wfsEZyuktKXq8rp+qOFpwRyDygg4SBTaoywIDAQAB",
+    "avp": "AAAAB3NzaC1yc2EAAAADAQABAAABgQDQGbdkx5x7aNewSDt7HTDmHndXtTQp+9F99Q/t/2/s7a32OyR6dDRBUO2T0iF4MwRgddT8V4/7v4MvotCYNRGkSetzVHNKkZiCsD2nOZHIFruhlv/2kqRTohBfDblyhBvPbFQmxnECEo758yZnlHYTSmHDMDMhul2WXqA58jO9MVam/k8opb2hpbS8uQlPWbVtOOJ6B8FK/FD0rolBSusz//Y89VQik5A9r5oGV+I7nws6fyvwyzXvASSMOEpbONVhziHoKZacpx7AxDiytpvOaChbCBCXOY+B9KHfJD7aZuJYKaYagJYrngKVWXVYwVOecqi6k04t9943WPjsjkuPsHXJkFI0TJrMNb4nO5sDNE3ZR8sOrfI+xW/GkkNWYwY6oCUymYLVcdi2n4O8hYUkiB1NW/DpU0Fvc889VC/o+SLi+2ZDO1CHUV9rF/UQL6Y4O4qJn9kOX8d/eR+3BZs/phU+81uBqObxcVo2o32YkCL/4v8lvscS0LFpp5irVfE=",
+    "pbc": "AAAAB3NzaC1yc2EAAAADAQABAAABgQDIgZC1cu1ZYN4+/ItnB7nXbcE1gcCl5ueNwmFg+lRsTJJy1dryxNJGiX2bq9vIu/1w5zVLJ00tOlBsbrQyNDjX9HznCPfplb/TLxxDoC7LjYIL9vyHTxjtbFg2N9aG98dThBLNJlsXP7gsJrtDl7mZJ9Ikag9s+5uoZt0qD6fbJoAtiX2FudsLBVcj0be/SLeQ4NrEW+HiqWfw7Qw+XgpQB/59mPXGBicKImjCr9jZKCcZbXQiC/FRrAbpesWIxc8gkmKEanfQPqzflirT5Z4s7H5/ZSYlov9e0B/17YLU3S/9lJ+8ZSbArBjQljsjvsCpEJDZa8w1xea1sUwVcMJXaneAWmPuz6YKVMHsaoe6UU7c6OiAH90ko/Rv7qSJuBmuzr5unMVLB6uhSohKej1wf8ny8NLnqlmaRXUDfAmfb/RxiFep8FBho+MXQE4XO3bUmB1myW05l8F6DBinkTIo2YKwd6a2eFE/QOevLdryAYS44G8VWWoZRC5tQqlUq4c=",
+    "abh": "AAAAB3NzaC1yc2EAAAADAQABAAABgQCv1J5tMa5Y8oispR6F17PdguYPBLpfhpXCw4wecTtaugD6VQetJ+IQBcQ3uaV1bxkxalJeBee1Ya4Plh16pq03Nos4HO9OheiaR3GPMRAvbIf6YV0MCrj2fHdC3SzILT1DgjfZDYvpO3fZCxvLfEpYeYMCYnAaI3UFTP3d4licuk35WfvshV/CHW0S1Pv2qByTC7FvB/GDl95hBH2kJY6LAuGVx1dv/gG5I5vB5r+HnRbTV7IN3+P9/j2WM85/qCyF9yBAlhI0x3aH9bcI8dFgfWlzbhBx2abXmMtF1yn1YAyvXcGxlRh8RC1vsPoV5EVDDmoRdmAf0NhbWyz4qvaRwvwtAjk5E/UaVi5WYuviIGEnmPJain4NtTO/3OrUYx9s1sZrtVaRumAu62DFgT37HdW+JSXMWzzbpvg28CquMRFXtVBroFBICHVrNKN2Ra1fmGoWxYGp0wXizvN/YfMU8fEoRQ8v3x6Rc8312Bez9zARBkY6aknK7+P28PduIXc=",
+    "nci": "AAAAB3NzaC1yc2EAAAADAQABAAABAQD1AMNWu9KalxGSmOSFmSmk2QvU8rdVvI9KLvbS3OrSeMlYVEV1+SjsgraGQ5C0o+nJiQSWfhOTfAYXEf+DotchXU2Q/gzXIUMTBudxr77mNKavybROVxqukxefc0P3QiUQxrDd7R7xEhyzurK/bkmCvqhsjVKR19jpPrBvpR+4ISo7qZEH3PJ+n2xEF1gK7m9WUx4P0GgJ7/mt8YcXQqId0qimN1Ulbc00FdsF7qKhjd37MWbKov5WB8Zi5xBAuw7F2IYBDWY4JCWm8Gd3hhg57hGUy0olfdMEFf811UEnIv7PYdDaXLUh+laeOcceOrkpyp4RPSHymyHzSQhVT9al",
+    "emsi": "AAAAB3NzaC1yc2EAAAADAQABAAABgQCzdEDBooTMH8H01uin7t9bfQfpb/WpUZYtoHIUWBxm061RIw6APFFf25nfK9yR27FrAZaaNGZxcuTrgDF/1n9X1GufMDn3OfCdUSqlQSgYjk7ekMidNds1IZ/rI8YxNUyJIAJkbNp9oIG0vbJtr25xaSjA5MI7HPzlVl51D6Wzo94eJblclzJVJaLMjgM/WuFjEuyBREeUM3INzskVsVuQsakpI1XeM2TdLxQdjevnr9E3M8VRCOaDImckjXFWoQLYATilRrUlcvv2IQ4rpAKalOkRBAxhRkq75F0C4AT4kRQ8pioaqvmjhDhVwVt9Lt5Pt7HDu+4Sy/SjSoFI+HgaWaR+Delm6Ip2yNGY56HWRvtF1ihUQldW3HiA0aS6lKrZY/ZDg9N034cTapywWmA3uyUky+SGNQXb1PLx3YM3wrQFToZVA3YERHEigfRU7oN4DTPW19EL+VMWpYnYXRHwEQSqsfyrMEVSrHGuNTHCr36xr3Gr9m5xOzIKKzYZfA0=",
+    "dpm": "AAAAB3NzaC1yc2EAAAADAQABAAABAQC/AfzLR76kKJbYEgks960kHfaABQHEva7aaEH5pUeG/5EoSj1b+Q0vBzeJkF0Pdcscs00kSBPQSJ91bfzoIpeLhU7hHK/CAbTok/5vUmTdmmU7KbJzFoJGFTTzpGTdsQ5/YNvKUtqNlm3a0DiB9Ampyfv8FZWNK5r6I4xdeIhAUgPDwNWKPMgWfd4SFs6R1gePG2FfPR5MEZgPcw3+fZgUOhMBhwhNFzqlz/rDVm4FPU1gsJscT6p1CONuuDOLM82eqjH95WEbCxUV2CTc2ju+whO0Ub02wh80lBc9N+hDGbWb0mqo1lEMorkDJmhA6l7P8sA7rQcFtpQdEdT9OZVr",
+    "rdm": "AAAAB3NzaC1yc2EAAAADAQABAAABAQC19bVazMXGwKZGbTjBlaV9m9aJuKmfxVrKSUjai3sSfnshViqHwoCIxOnjXNdOQec5rWoi2dAMXlnigx099aKysZD0mGQHa1jFoCbYylsgbh2lDJmurElbGfd8UTEHXEFf+pvw2H+pVS5GSi+2r3RBtp675v16FFgMsv7+rhKHpBV06p45qcPeLmFYlZV0UCojXDEs7Qcyrt1PrAVi+sQb3vwWrvvH4hcZMiji4mo5ak8XzBlCOKsWar1LeIZ/uChsqI9RmywoMgDOsvFCbpA6l4uHqSN6emDXfJSH+ofU1BgyxpflFI1yLv9Nv8ntMZ/ZVXvrq8kTasRfBd6JsH6v",
+}
+
+def getPubkey(id):
+
+    if id not in pubkeydictionary:
+        print(f'Couldn\'t find key with id: \'{id}\'')
+        exit(1)
+
+    key = pubkeydictionary[id]
+
+    if key is None:
+        print(f'Couldn\'t find key with id: \'{id}\'')
+        exit(1)
+
+    pubkey = "ssh-rsa " + key
+    return serialization.load_ssh_public_key(
+            pubkey.encode('ascii'),
+            backend=default_backend()
+        )
