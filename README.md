@@ -21,6 +21,7 @@ Key Features:
 ```text
 .
 ├── README.md
+├── LICENSE
 ├── requirements.txt
 └── src
     ├── colors.py
